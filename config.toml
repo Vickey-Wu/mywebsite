@@ -1,9 +1,10 @@
 # default config
-baseURL = "https://vickey-wu.github.io/"
-languageCode = "en-us"
-title = "Parsa | Personal Blog Template"
+baseURL = "https://www.vickey-wu.com/"
+#baseURL = "http://111.229.39.228"
+languageCode = "cn-zh"
+title = "吴悟无"
 theme = "parsa-hugo"
-summaryLength = "10"
+summaryLength = "6"
 paginate = 6
 
 # output
@@ -44,37 +45,45 @@ link = "plugins/search/search.js"
 
 # navigation
 [[menu.main]]
-name = "About"
-URL = "about"
+name = "POSTS"
+URL = "posts"
 weight = 2
 
+#[[menu.main]]
+#name = "Contact"
+#URL = "contact"
+#weight = 3
+
 [[menu.main]]
-name = "Contact"
-URL = "contact"
-weight = 3
+name = "About"
+URL = "about"
+weight = 4
 
 # deult parameter
 [params]
 logo = "images/logo.png"
 home = "Home"
 # theme layout ( two layout is available, "1" and "2" )
-layout = "1"
+layout = "2"
 # Meta data
 description = "This is meta description"
 # about author
-author = "Themefisher"
+author = "Viceky Wu"
 author_image = "images/banner-img.png"
-bio = "I’m a Freelance Interactive Art Director based in France. Focusing across branding and identity, digital and print."
+bio = "大家好，我是吴悟无，90后，性别男，爱好女, 一个背锅工程师（你懂的）"
 # Contact info
-mobile = "+90 000 333 22"
-email = "exmaple@ymail.com"
-address = "6 rip carl Avenue CA 90733"
+mobile = "+86 188 xxxx 8888"
+email = "vickeywu557@qq.com"
+address = "Taiwan, China"
 # Contact Form Action
 contact_form_action = "#"
 # Google Analitycs
-google_analitycs_id = "Your ID"
+google_analitycs_id = "UA-160193453-1"
 # copyright
-copyright = "Copyright &copy; 2020 a theme by [themefisher.com](themefisher.com)"
+copyright = "Copyright &copy; 2020 a theme by [parsa-hugo](https://github.com/themefisher/parsa-hugo)"
+# beianhao
+beianhao = "1233242"
+
 
 # Preloader
 [params.preloader]
@@ -84,25 +93,11 @@ enable = true
 [params.search]
 enable = true
 
-# Instagram feed
-[params.instafeed]
-enable = true
-user_id = "4044026246"
-access_token = "4044026246.1677ed0.8896752506ed4402a0519d23b8f50a17"
-
 # social site
 [[params.social]]
-icon = "ti-facebook"
-URL = "#"
-
-[[params.social]]
-icon = "ti-twitter-alt"
-URL = "#"
-
-[[params.social]]
-icon = "ti-linkedin"
-URL = "#"
+icon = "ti-email"
+URL = "https://www.vickey-wu.com/about/"
 
 [[params.social]]
 icon = "ti-github"
-URL = "#"
+URL = "https://github.com/Vickey-Wu"
