@@ -1,11 +1,10 @@
 # default config
 baseURL = "https://www.vickey-wu.com/"
-#baseURL = "http://111.229.39.228"
 languageCode = "cn-zh"
 title = "吴悟无"
 theme = "parsa-hugo"
 summaryLength = "6"
-paginate = 6
+paginate = 4
 
 # output
 [outputs]
@@ -43,19 +42,19 @@ link = "plugins/search/mark.js"
 [[params.plugins.js]]
 link = "plugins/search/search.js"
 
-# navigation
-[[menu.main]]
-name = "POSTS"
-URL = "posts"
-weight = 2
+## navigation
+#[[menu.main]]
+#name = "posts"
+#URL = "posts"
+#weight = 2
 
 #[[menu.main]]
-#name = "Contact"
-#URL = "contact"
+#name = "share"
+#URL = "share"
 #weight = 3
 
 [[menu.main]]
-name = "About"
+name = "about"
 URL = "about"
 weight = 4
 
@@ -80,7 +79,7 @@ contact_form_action = "#"
 # Google Analitycs
 google_analitycs_id = "UA-160193453-1"
 # copyright
-copyright = "Copyright &copy; 2020 a theme by [parsa-hugo](https://github.com/themefisher/parsa-hugo)"
+copyright = "[粤ICP备20018746号-1](http://www.beian.miit.gov.cn/) Copyright &copy; 2018-2020 a theme by [parsa-hugo](https://github.com/themefisher/parsa-hugo)"
 # beianhao
 beianhao = "1233242"
 

@@ -18,4 +18,4 @@ image: "images/author.jpg"
 
 是兄弟，来砍我！扫一下这个神奇的二维码，我在微信公众号 **吴悟无** 等你哦！
 
-![qrcode](../images/qrcode_15.jpg)
+![qrcode](../images/qrcode_12.jpg)

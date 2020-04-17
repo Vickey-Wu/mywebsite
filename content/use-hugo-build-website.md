@@ -1,13 +1,15 @@
 ---
-title: "use hugo build website"
-date: 2020-04-01T03:10:06Z
+title: "使用hugo建站"
+date: 2018-11-28T03:10:06Z
 description: "This is meta description"
 type: "post"
-image: "https://cdn.pixabay.com/photo/2018/07/25/20/29/ecommerce-3562191_1280.jpg"
+image: "https://s1.ax1x.com/2020/04/16/JF8ZOf.md.jpg"
 categories:
   - "hugo"
+  - "docker"
 tags:
   - "hugo"
+  - "docker"
   - "website"
 ---
 
