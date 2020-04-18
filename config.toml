@@ -1,6 +1,6 @@
 # default config
 baseURL = "https://www.vickey-wu.com/"
-languageCode = "cn-zh"
+languageCode = "zh-cn"
 title = "吴悟无"
 theme = "parsa-hugo"
 summaryLength = "6"
