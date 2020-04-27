@@ -3,7 +3,7 @@ title: "docker部署superset"
 date: 2019-01-01T03:10:06Z
 description: "This is meta description"
 type: "post"
-image: "https://s1.ax1x.com/2020/04/16/JFkPiD.md.jpg"
+image: "https://s1.ax1x.com/2020/04/27/Jffp5j.md.jpg"
 categories:
   - "docker"
 tags:

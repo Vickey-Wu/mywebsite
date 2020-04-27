@@ -3,7 +3,7 @@ title: "mongodb基本用法"
 date: 2019-06-19T03:10:06Z
 description: "This is meta description"
 type: "post"
-image: "https://s1.ax1x.com/2020/04/16/JFEZUf.md.jpg"
+image: "https://s1.ax1x.com/2020/04/27/JfWIVe.md.jpg"
 categories:
   - "mongodb"
 tags:
