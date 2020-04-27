@@ -60,7 +60,7 @@ weight = 4
 
 # deult parameter
 [params]
-logo = "images/logo.png"
+logo = "https://note.youdao.com/yws/api/personal/file/C4910B22FC3E42D5871A486C9FF8790F?method=download&shareKey=10e1d28d2d230f120165cb901aa3ea1a"
 home = "Home"
 # theme layout ( two layout is available, "1" and "2" )
 layout = "2"
