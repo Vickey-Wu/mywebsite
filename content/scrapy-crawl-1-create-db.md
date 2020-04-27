@@ -3,7 +3,7 @@ title: "scrapy电影天堂实战---创建数据库"
 date: 2019-07-10T03:10:06Z
 description: "This is meta description"
 type: "post"
-image: "https://s1.ax1x.com/2020/04/17/JEoD1S.md.jpg"
+image: "https://note.youdao.com/yws/api/personal/file/866A54E79B2147C68C479092510C65CB?method=download&shareKey=10e1d28d2d230f120165cb901aa3ea1a"
 categories:
   - "scrapy"
   - "mysql"

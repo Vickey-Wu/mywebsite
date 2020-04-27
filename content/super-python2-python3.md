@@ -3,7 +3,7 @@ title: "python2 python3的super"
 date: 2019-06-11T03:10:06Z
 description: "This is meta description"
 type: "post"
-image: "https://s1.ax1x.com/2020/04/16/JFEZUf.md.jpg"
+image: "https://note.youdao.com/yws/api/personal/file/452EAA2FD34C4F5F86BB3043219A667F?method=download&shareKey=10e1d28d2d230f120165cb901aa3ea1a"
 categories:
   - "python"
 tags:

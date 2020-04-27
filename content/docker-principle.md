@@ -3,7 +3,7 @@ title: "docker原理总结"
 date: 2018-11-21T03:10:06Z
 description: "dockefile basic"
 type: "post"
-image: "https://s1.ax1x.com/2020/04/16/JFEZUf.md.jpg"
+image: "https://note.youdao.com/yws/api/personal/file/812FC1B340754E73A6C9371F2E140BB4?method=download&shareKey=10e1d28d2d230f120165cb901aa3ea1a"
 categories:
   - "docker"
 tags:

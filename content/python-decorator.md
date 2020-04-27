@@ -3,7 +3,7 @@ title: "python装饰器decorator"
 date: 2019-09-16T03:10:06Z
 description: "This is meta description"
 type: "post"
-image: "https://s1.ax1x.com/2020/04/17/JEonT1.md.jpg"
+image: "https://note.youdao.com/yws/api/personal/file/E89AFE6CBA8E4D1CB52E1F17DBEC703E?method=download&shareKey=10e1d28d2d230f120165cb901aa3ea1a"
 categories:
   - "python"
 tags:

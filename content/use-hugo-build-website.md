@@ -3,7 +3,7 @@ title: "使用hugo建站"
 date: 2018-11-28T03:10:06Z
 description: "This is meta description"
 type: "post"
-image: "https://s1.ax1x.com/2020/04/16/JF8ZOf.md.jpg"
+image: "https://note.youdao.com/yws/api/personal/file/5B378AB17AA1468EB4CE978A288CE130?method=download&shareKey=10e1d28d2d230f120165cb901aa3ea1a"
 categories:
   - "hugo"
   - "docker"

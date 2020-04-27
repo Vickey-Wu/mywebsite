@@ -3,7 +3,7 @@ title: "scrapy过滤和增量爬取"
 date: 2019-07-25T03:10:06Z
 description: "This is meta description"
 type: "post"
-image: "https://s1.ax1x.com/2020/04/17/JETZ38.md.jpg"
+image: "https://note.youdao.com/yws/api/personal/file/0AB76AB0B7C848789E612895D36062C9?method=download&shareKey=10e1d28d2d230f120165cb901aa3ea1a"
 categories:
   - "scrapy"
 tags:

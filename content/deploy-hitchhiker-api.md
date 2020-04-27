@@ -3,7 +3,7 @@ title: "docker部署hitchhiker-api"
 date: 2018-12-01T03:10:06Z
 description: "This is meta description"
 type: "post"
-image: "https://s1.ax1x.com/2020/04/16/JF8V6P.md.jpg"
+image: "https://note.youdao.com/yws/api/personal/file/BB659B06E2944806A2CD7D375EBFD7AF?method=download&shareKey=10e1d28d2d230f120165cb901aa3ea1a"
 categories:
   - "api"
 tags:

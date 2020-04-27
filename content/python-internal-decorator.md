@@ -3,7 +3,7 @@ title: "python内置装饰器"
 date: 2019-09-17T03:10:06Z
 description: "This is meta description"
 type: "post"
-image: "https://s1.ax1x.com/2020/04/17/JVrpqS.md.jpg"
+image: "https://note.youdao.com/yws/api/personal/file/1DEE64A6D9A84BA0BC3C7A02725B811D?method=download&shareKey=10e1d28d2d230f120165cb901aa3ea1a"
 categories:
   - "python"
 tags:

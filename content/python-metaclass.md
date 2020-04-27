@@ -3,7 +3,7 @@ title: "python超类 元类"
 date: 2019-06-12T03:10:06Z
 description: "This is meta description"
 type: "post"
-image: "https://s1.ax1x.com/2020/04/17/JETdb9.md.jpg"
+image: "https://note.youdao.com/yws/api/personal/file/A4805FD3D4FC45C28FFFC30E95BF4C1A?method=download&shareKey=10e1d28d2d230f120165cb901aa3ea1a"
 categories:
   - "python"
 tags:

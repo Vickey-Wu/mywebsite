@@ -3,7 +3,7 @@ title: "开机启动docker容器里的程序"
 date: 2018-12-10T03:10:06Z
 description: "This is meta description"
 type: "post"
-image: "https://s1.ax1x.com/2020/04/16/JF8mm8.md.jpg"
+image: "https://note.youdao.com/yws/api/personal/file/4BA11CE3936F4EAF9351604931CAD8B1?method=download&shareKey=10e1d28d2d230f120165cb901aa3ea1a"
 categories:
   - "docker"
 tags:

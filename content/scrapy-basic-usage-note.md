@@ -3,7 +3,7 @@ title: "scrapy基本用法"
 date: 2019-07-08T03:10:06Z
 description: "This is meta description"
 type: "post"
-image: "https://s1.ax1x.com/2020/04/17/JEoc0s.md.jpg"
+image: "https://note.youdao.com/yws/api/personal/file/CC82F34E4CAB458F913FD79C5ED2FDA1?method=download&shareKey=10e1d28d2d230f120165cb901aa3ea1a"
 categories:
   - "scrapy"
 tags:

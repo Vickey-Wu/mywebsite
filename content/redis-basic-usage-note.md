@@ -3,7 +3,7 @@ title: "redis基本用法"
 date: 2019-07-20T03:10:06Z
 description: "This is meta description"
 type: "post"
-image: "https://s1.ax1x.com/2020/04/16/JFEZUf.md.jpg"
+image: "https://note.youdao.com/yws/api/personal/file/AFBD8594B66F4270873718150F070860?method=download&shareKey=10e1d28d2d230f120165cb901aa3ea1a"
 categories:
   - "redis"
 tags:

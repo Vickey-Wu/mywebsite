@@ -3,7 +3,7 @@ title: "docker部署superset"
 date: 2019-01-01T03:10:06Z
 description: "This is meta description"
 type: "post"
-image: "https://s1.ax1x.com/2020/04/27/Jffp5j.md.jpg"
+image: "https://note.youdao.com/yws/api/personal/file/0D130F7FEE104F75B825F7AC0A209120?method=download&shareKey=10e1d28d2d230f120165cb901aa3ea1a"
 categories:
   - "docker"
 tags:

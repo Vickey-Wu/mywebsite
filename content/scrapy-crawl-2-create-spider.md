@@ -3,7 +3,7 @@ title: "scrapy电影天堂实战---创建爬虫"
 date: 2019-07-16T03:10:06Z
 description: "This is meta description"
 type: "post"
-image: "https://s1.ax1x.com/2020/04/17/JET1Nq.md.jpg"
+image: "https://note.youdao.com/yws/api/personal/file/5302B30E77E641CB80D8AAAE3A118014?method=download&shareKey=10e1d28d2d230f120165cb901aa3ea1a"
 categories:
   - "scrapy"
 tags:

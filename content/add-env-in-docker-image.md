@@ -3,7 +3,7 @@ title: "在docker镜像中加入环境变量"
 date: 2019-06-24T03:10:06Z
 description: "This is meta description"
 type: "post"
-image: "https://s1.ax1x.com/2020/04/17/JEooX4.md.jpg"
+image: "https://note.youdao.com/yws/api/personal/file/419816B26ED740CC9E4DDC5B17107C67?method=download&shareKey=10e1d28d2d230f120165cb901aa3ea1a"
 categories:
   - "docker"
 tags:
