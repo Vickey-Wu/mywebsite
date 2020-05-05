@@ -22,7 +22,13 @@
   <link rel="icon" href="{{ `images/favicon.png` | absURL }} " type="image/x-icon">
 
   <!-- Highlight.js and css -->
+  {{ $styles := resources.Get "css/default.min.css" | minify }}
+  <link rel="stylesheet" href="{{ $styles.Permalink }}">
+  {{ $styles := resources.Get "js/highlight.js" | minify }}
+  <script src="{{ $styles.Permalink }}"></script>
+  <!-- 
   <link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/default.min.css">
   <script src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+   -->
   <script>hljs.initHighlightingOnLoad();</script>
 </head>

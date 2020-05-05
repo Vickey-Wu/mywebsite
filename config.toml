@@ -42,11 +42,11 @@ link = "plugins/search/mark.js"
 [[params.plugins.js]]
 link = "plugins/search/search.js"
 
-## navigation
-#[[menu.main]]
-#name = "posts"
-#URL = "posts"
-#weight = 2
+# navigation
+[[menu.main]]
+name = "posts"
+URL = "posts"
+weight = 2
 
 #[[menu.main]]
 #name = "share"
@@ -60,7 +60,8 @@ weight = 4
 
 # deult parameter
 [params]
-logo = "https://note.youdao.com/yws/api/personal/file/C4910B22FC3E42D5871A486C9FF8790F?method=download&shareKey=10e1d28d2d230f120165cb901aa3ea1a"
+#logo = "https://note.youdao.com/yws/api/personal/file/C4910B22FC3E42D5871A486C9FF8790F?method=download&shareKey=10e1d28d2d230f120165cb901aa3ea1a"
+logo = "https://note.youdao.com/yws/api/personal/file/433E3F3F7C914517B99B4D8B5F1948D2?method=download&shareKey=10e1d28d2d230f120165cb901aa3ea1a"
 home = "Home"
 # theme layout ( two layout is available, "1" and "2" )
 layout = "2"
