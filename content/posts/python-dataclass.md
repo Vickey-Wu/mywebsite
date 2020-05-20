@@ -15,9 +15,9 @@ tags:
 
 之前有写过一篇python元类的笔记，元类主要作用就是在要创建的类中使用参数`metaclass=YourMetaclass`调用自定义的元类，这样就可以为所有调用了这个元类的类添加相同的属性了。
 
->有需要查看链接:https://mp.weixin.qq.com/s/gmR_pggxeitPWKmnbo1usw
+>有需要查看链接: `https://mp.weixin.qq.com/s/gmR_pggxeitPWKmnbo1usw`
 
-本篇笔记主要是对`dataclass`的特性作了解和对参考文章的总结摘要，完整文章地址：https://realpython.com/python-data-classes/
+本篇笔记主要是对`dataclass`的特性作了解和对参考文章的总结摘要，完整文章地址：`https://realpython.com/python-data-classes/`
 
 #### python数据类初识
 

@@ -90,7 +90,7 @@ repeat passwd: mypassword
 #### 5.前端访问
 
 ```
-http://ip:8088/
+`http://ip:8088/`
 ```
 
 ### 二、使用项目demo数据库

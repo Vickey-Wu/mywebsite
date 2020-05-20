@@ -147,7 +147,7 @@ to_fahrenheit: -126.4
 
 - 参考文章
 
->https://www.programiz.com/python-programming/property
+>`https://www.programiz.com/python-programming/property`
 
 #### 二、staticmethod装饰器(静态方法)
 
@@ -191,7 +191,7 @@ Equal_1
 
 - 参考文章
 
->https://www.programiz.com/python-programming/methods/built-in/staticmethod
+>`https://www.programiz.com/python-programming/methods/built-in/staticmethod`
 
 #### 三、classmethod装饰器(类方法)
 
@@ -313,7 +313,7 @@ man3是类Person的实例吗 True
 
 - 参考文章
 
->https://www.programiz.com/python-programming/methods/built-in/classmethod
+>`https://www.programiz.com/python-programming/methods/built-in/classmethod`
 
 #### 四、综合比较
 

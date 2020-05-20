@@ -215,7 +215,7 @@ Finished 'TimeWaster' in 0.0000 secs
 
 #### 9、装饰器实现debug功能
 
->f-string文档：https://www.python.org/dev/peps/pep-0498/#s-r-and-a-are-redundant
+>f-string文档：`https://www.python.org/dev/peps/pep-0498/#s-r-and-a-are-redundant`
 
 ```
 import functools
@@ -407,8 +407,8 @@ Whee!
 ### 结语
 >这篇文章基本是一步步深入的，所以按步骤去看会比较容易易理解
 
-- 文章原文:https://realpython.com/primer-on-python-decorators/)
-- 示例源码：https://github.com/realpython/materials/tree/master/primer-on-python-decorators
+- 文章原文: `https://realpython.com/primer-on-python-decorators/`
+- 示例源码：`https://github.com/realpython/materials/tree/master/primer-on-python-decorators`
 
 #### 类的内置装饰器
 

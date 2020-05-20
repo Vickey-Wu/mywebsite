@@ -37,7 +37,7 @@ tags:
 
 #### 引用scrapy-redis
 
->修改settings.py添加配置，完整配置查看：https://github.com/rmax/scrapy-redis#usage
+>修改settings.py添加配置，完整配置查看：`https://github.com/rmax/scrapy-redis#usage`
 
 ```
 ###### scrapy-redis settings start ######

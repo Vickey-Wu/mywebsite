@@ -18,7 +18,7 @@ tags:
 
 #### 用到的xpath相关知识
 
->reference: https://germey.gitbooks.io/python3webspider/content/4.1-XPath%E7%9A%84%E4%BD%BF%E7%94%A8.html
+>reference: `https://germey.gitbooks.io/python3webspider/content/4.1-XPath%E7%9A%84%E4%BD%BF%E7%94%A8.html`
 
 ```
 nodename	选取此节点的所有子节点
@@ -239,13 +239,13 @@ LOG_FILE = '/var/log/scrapy.log'
 
 - pipelines.py
 
->reference: https://docs.scrapy.org/en/latest/topics/item-pipeline.html?highlight=filter#item-pipeline
+>reference: `https://docs.scrapy.org/en/latest/topics/item-pipeline.html?highlight=filter#item-pipeline`
 
 >项目爬虫(`scrapy genspider spidername`命令生成到爬虫文件)抓取到数据之后将它们发送到项目管道(项目下到`pipelines.py`文件里定义到各种`class`)，管道通过`settings.py`里面定义的`ITEM_PIPELINES`优先级顺序(0~1000从小到大)来处理数据。
 
 >作用：1.清洗数据 2.验证数据（检查项目是否包含某些字段） 3.检查重复项（并删除它们） 4.将数据存储到数据库
 
->reference: http://scrapingauthority.com/scrapy-database-pipeline/
+>reference: `http://scrapingauthority.com/scrapy-database-pipeline/`
 
 
 ```
@@ -408,4 +408,4 @@ root@ubuntu:/home/vickey/scrapy_project/movie_heaven_bar# docker logs -f scrapy_
 
 **不过**，如果我中途停止了爬取，又要从头开始爬，所以就会有**数据重复**，很烦。**下一篇笔记写下scrapy的去重方法**，这样就不会有数据重复了，也可以节省爬取耗时。
 
->代码已上传至github: https://github.com/Vickey-Wu/movie_heaven_bar
+>代码已上传至github: `https://github.com/Vickey-Wu/movie_heaven_bar`

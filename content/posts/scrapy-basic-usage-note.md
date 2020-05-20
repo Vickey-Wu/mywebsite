@@ -13,13 +13,13 @@ tags:
 
 #### 前言
 
->reference: https://www.tutorialspoint.com/scrapy/scrapy_quick_guide.htm
+>reference: `https://www.tutorialspoint.com/scrapy/scrapy_quick_guide.htm`
 
->offical doc: http://doc.scrapy.org/en/1.0/intro/tutorial.html
+>offical doc: `http://doc.scrapy.org/en/1.0/intro/tutorial.html`
 
 #### 安装
 
->reference: http://doc.scrapy.org/en/1.0/intro/install.html#intro-install
+>reference: `http://doc.scrapy.org/en/1.0/intro/install.html#intro-install`
 
 - 启动个容器安装scrapy(耗时比较长)
 
@@ -83,7 +83,7 @@ Use "scrapy <command> -h" to see more info about a command
 
 #### 创建项目
 
->reference: http://doc.scrapy.org/en/1.0/intro/tutorial.html#creating-a-project
+>reference: `http://doc.scrapy.org/en/1.0/intro/tutorial.html#creating-a-project`
 
 ```
 root@ubuntu:/home/vickey# docker exec -it test-scrapy /bin/bash
@@ -230,7 +230,7 @@ ROBOTSTXT_OBEY = True
 
 - 项目爬虫文件
 
->reference: https://docs.scrapy.org/en/latest/topics/spiders.html?highlight=filter#scrapy-spider
+>reference: `https://docs.scrapy.org/en/latest/topics/spiders.html?highlight=filter#scrapy-spider`
 
 ```
 root@2fb0da64a933:/home/test_scrapy/test_scrapy# cd spiders/

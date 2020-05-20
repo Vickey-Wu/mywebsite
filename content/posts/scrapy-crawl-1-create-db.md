@@ -74,7 +74,7 @@ Query OK, 0 rows affected (0.02 sec)
 
 #### [创建用户并授权](https://blog.csdn.net/weixin_38091140/article/details/82983229)
 
->https://blog.csdn.net/weixin_38091140/article/details/82983229
+>`https://blog.csdn.net/weixin_38091140/article/details/82983229`
 
 本例mysql是mysql8，授权方法为：`grant all privileges on movie_heaven_bar.* to 'movie'@'%' with grant option;`，mysql8以下的版本授权方法为：`grant all privileges on movie_heaven_bar.* to 'movie'@'%' identified by 'password';`
 

@@ -16,7 +16,7 @@ tags:
 
 #### installation
 
->reference: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
+>reference: `https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/`
 
 - 1.add key
 
@@ -88,7 +88,7 @@ processManagement:
 #### basic usage
 - 1.windows install(ignore)
 
->reference: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
+>reference: `https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/`
 
 ![](https://note.youdao.com/yws/api/personal/file/6EB81BD475F3414B9ED339CF6709E509?method=download&shareKey=bd1b802903bc91c2659e14133ff9ec65)
 
@@ -104,7 +104,7 @@ mongo
 
 - 3.use db(create operation)
 
->reference: https://docs.mongodb.com/manual/reference/mongo-shell/
+>reference: `https://docs.mongodb.com/manual/reference/mongo-shell/`
 
 >mongodb default `dbs` "admin", "config", "local", no `collections`(table), no `documents`(table's record)
 
@@ -255,11 +255,11 @@ local            0.000GB
 
 - 8.advanced usage
 
->more advanced usage see official docs: https://docs.mongodb.com/manual/crud/
+>more advanced usage see official docs: `https://docs.mongodb.com/manual/crud/`
 
 #### user security
 
->createuser reference: https://docs.mongodb.com/manual/reference/method/db.createUser/#examples
+>createuser reference: `https://docs.mongodb.com/manual/reference/method/db.createUser/#examples`
 
 >to run mongodb security(need to auth user firstly) we should use follow command to run or restart mongod
 

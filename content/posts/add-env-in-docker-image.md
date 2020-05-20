@@ -12,7 +12,7 @@ tags:
 
 
 #### 前言
->reference:https://vsupalov.com/docker-build-time-env-values/
+>reference:`https://vsupalov.com/docker-build-time-env-values/`
 
 很多时候，我们需要**在docker镜像中加入环境变量**，本人了解的有2种方法可以做到
 

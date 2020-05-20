@@ -13,7 +13,7 @@ tags:
 
 ### 前言
 
->reference: https://www.tutorialspoint.com/redis/redis_quick_guide.htm
+>reference: `https://www.tutorialspoint.com/redis/redis_quick_guide.htm`
 
 >scrapy过滤重复链接使用到了redis，所以就先熟悉了下redis的基础。这篇笔记记录了redis的安装、配置、操作数据类型等
 
@@ -147,7 +147,7 @@ OK
 
 >直接用redis的docker镜像的话，它没有留有配置文件在里面，要修改的话只能自己挂载一个配置文件进去。
 
->reference: https://hub.docker.com/_/redis
+>reference: `https://hub.docker.com/_/redis`
 
 ```
 root@ubuntu:/home/vickey/scrapy_project/db# docker run -itd --name scrapy_redis -v /home/vickey/scrapy_project/db/redis.conf:/usr/local/etc/redis/redis.conf -p 8889:6379 redis redis-server /usr/local/etc/redis/redis.conf
@@ -169,7 +169,7 @@ OK
 
 ## 操作redis数据类型
 
->如需查看所有命令请查看：https://www.tutorialspoint.com/redis/redis_quick_guide.htm
+>如需查看所有命令请查看：`https://www.tutorialspoint.com/redis/redis_quick_guide.htm`
 
 #### 概览
 
