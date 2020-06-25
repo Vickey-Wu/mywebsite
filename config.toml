@@ -101,3 +101,7 @@ URL = "https://www.vickey-wu.com/about/"
 [[params.social]]
 icon = "ti-github"
 URL = "https://github.com/Vickey-Wu"
+
+[[params.social]]
+icon = "ti-link"
+URL = "https://github.com/Vickey-Wu"

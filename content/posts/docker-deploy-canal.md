@@ -13,6 +13,7 @@ tags:
   - "rootfs"
 ---
 
+
 #### 一、canal-admin-mysql
 
 ##### 1. 自建mysql（使用阿里云rds看下一步）
