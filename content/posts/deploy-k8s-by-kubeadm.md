@@ -60,7 +60,7 @@ localhost.localdomain
 
 #### 三、centos7安装docker
 
->https://docs.docker.com/engine/install/centos/
+>`https://docs.docker.com/engine/install/centos/`
 
 ```
 sudo yum install -y yum-utils
@@ -103,7 +103,7 @@ systemctl enable docker
 
 #### 四、使用国内镜像源
 
->https://zhuanlan.zhihu.com/p/59048502
+>`https://zhuanlan.zhihu.com/p/59048502`
 
 新建镜像源
 
@@ -192,7 +192,7 @@ sysctl -p
 
 按照提示执行命令来获取我们需要安装哪些版本的镜像
 
->https://zhuanlan.zhihu.com/p/46341911
+>`https://zhuanlan.zhihu.com/p/46341911`
 
 ```
 [root@master-1 ~]# kubeadm config images list
@@ -299,7 +299,7 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documen
 
 如果执行不了就手动GitHub复制一份来执行
 
->https://github.com/coreos/flannel/blob/master/Documentation/kube-flannel-aliyun.yml
+>`https://github.com/coreos/flannel/blob/master/Documentation/kube-flannel-aliyun.yml`
 
 ```
 kubectl apply -f kube-flannel.yml

@@ -26,7 +26,7 @@ tags:
 ├── start.sh
 └── vhosts
     ├── test1.vickey-wu.com.conf
-    └── test1.vickey-wu.com.conf
+    └── test2.vickey-wu.com.conf
 ```
 
 #### 文件详解

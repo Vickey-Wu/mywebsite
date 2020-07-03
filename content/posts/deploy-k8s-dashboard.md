@@ -13,7 +13,7 @@ tags:
 
 #### dashboard的yaml文件
 
->https://github.com/kubernetes/dashboard/blob/master/aio/deploy/recommended.yaml
+>`https://github.com/kubernetes/dashboard/blob/master/aio/deploy/recommended.yaml`
 
 
 ```
@@ -88,7 +88,7 @@ token:      eyJhbGciOiJSUzI1NiIsImtpZCI6IjhsN2lfbGl4aGFHbUhKRFM0ME50N1cxVXMwU2Z2
 
 所以还要创建一个有权限的用户才能访问，将文档的内容复制下来再执行，然后再用这个新建的用户的`token`登录即可。
 
->https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md
+>`https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md`
 
 ```
 [root@master-1 dashboard]# kubectl apply -f  copy-from-doc.yaml 
