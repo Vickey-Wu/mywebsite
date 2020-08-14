@@ -3,7 +3,7 @@ title: "k8s实践记录（四）"
 date: 2020-08-14T03:10:06Z
 description:  "k8s实践记录（四）"
 type: "post"
-image: "https://note.youdao.com/yws/api/personal/file/E89AFE6CBA8E4D1CB52E1F17DBEC703E?method=download&shareKey=10e1d28d2d230f120165cb901aa3ea1a"
+image: "https://note.youdao.com/yws/api/personal/file/4BA11CE3936F4EAF9351604931CAD8B1?method=download&shareKey=10e1d28d2d230f120165cb901aa3ea1a"
 categories:
   - "k8s"
 tags:
@@ -181,7 +181,7 @@ users:
     client-key-data: LS0tLS1CRUdJ.......RSBLRVktLS0tLQo=
 ```
 
-至此使用kube-config凭据方式访问集群所需的信息都已大工高成，接下来使用生成的凭据`vickey-config`测试一下。先切换一下上下文，然后用凭据访问`default`域名空间的pod资源，报错说`vickey`无法list域名空间default的资源pods。
+至此使用kube-config凭据方式访问集群所需的信息都已大功告成，接下来使用生成的凭据`vickey-config`测试一下。先切换一下上下文，然后用凭据访问`default`域名空间的pod资源，报错说`vickey`无法list域名空间default的资源pods。
 
 ```
 [root@master-1 yamlfiles]# kubectl config use-context vickey --kubeconfig=vickey-config
