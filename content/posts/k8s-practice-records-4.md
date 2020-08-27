@@ -11,7 +11,7 @@ tags:
   - "practice"
 ---
 
-### 16 如何对pod做权限限制？(认证篇)
+### 16 如何对pod做权限限制？（认证、授权篇）
 
 要想知道k8s如何对pod做权限限制，首先我们得知道pod是怎么访问k8s集群的资源的。
 
@@ -181,7 +181,7 @@ users:
     client-key-data: LS0tLS1CRUdJ.......RSBLRVktLS0tLQo=
 ```
 
-至此使用kube-config凭据方式访问集群所需的信息都已大功告成，接下来使用生成的凭据`vickey-config`测试一下。先切换一下上下文，然后用凭据访问`default`域名空间的pod资源，报错说`vickey`无法list域名空间default的资源pods。
+至此使用kube-config凭据方式访问集群所需的信息都已大工高成，接下来使用生成的凭据`vickey-config`测试一下。先切换一下上下文，然后用凭据访问`default`域名空间的pod资源，报错说`vickey`无法list域名空间default的资源pods。
 
 ```
 [root@master-1 yamlfiles]# kubectl config use-context vickey --kubeconfig=vickey-config
@@ -281,7 +281,7 @@ pod应用基本都是使用ServiceAccount访问集群，在访问时pod会自动
 - 相比第一种方式，**ServiceAccount**是k8s以**api的方式管理访问api-server的凭据**，也是唯一一个。
 
 - 这种方式通常用于pod中的业务进程与api-server交互
-- 当创建一个namespace创建后会同时在该namespace下生成名为`default`的ServeiceAccount和挂载类型为service-account-token用的secret。这个名为`default`的`serviceaccount`默认具有角色为`admin`的权限，能够管理该命名空间所有资源，但仅对当前域名空间有效，对其他空间无效。
+- 当创建一个namespace后会同时在该namespace下生成名为`default`的ServeiceAccount和挂载类型为service-account-token用的secret以方便pod需要访问集群资源时用到。但这个名为`default`的`serviceaccount`默认不具有任何权限。
 
 ```
 [root@master-1 yamlfiles]# kubectl  get serviceaccounts default -o yaml
@@ -321,49 +321,258 @@ metadata:
 type: kubernetes.io/service-account-token
 ```
 
-名为`default`的`serviceaccount`默认具有角色为`admin`的权限
+名为`default`的`serviceaccount`默认不具有任何权限，访问`svc, pod`等都是`403`的
 
 ```
-[root@master-1 ~]# kubectl get clusterrole admin -o yaml
-aggregationRule:
-  clusterRoleSelectors:
-  - matchLabels:
-      rbac.authorization.k8s.io/aggregate-to-admin: "true"
+[root@master-1 ~]# kubectl run -i --tty --rm curl --image=radial/busyboxplus:curl
+kubectl run --generator=deployment/apps.v1 is DEPRECATED and will be removed in a future version. Use kubectl run --generator=run-pod/v1 or kubectl create instead.
+If you don't see a command prompt, try pressing enter.
+[ root@curl-69c656fd45-2fghj:/ ]$ CA_CERT=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+[ root@curl-69c656fd45-2fghj:/ ]$ TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+[ root@curl-69c656fd45-2fghj:/ ]$ NAMESPACE=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)
+[ root@curl-69c656fd45-2fghj:/ ]$ curl --cacert $CA_CERT -H "Authorization: Bearer $TOKEN" "https://kubernetes/api/v1/namespaces/$NAMESPACE/services/"
+{
+  "kind": "Status",
+  "apiVersion": "v1",
+  "metadata": {
+    
+  },
+  "status": "Failure",
+  "message": "services is forbidden: User \"system:serviceaccount:default:default\" cannot list resource \"services\" in API group \"\" in the namespace \"default\"",
+  "reason": "Forbidden",
+  "details": {
+    "kind": "services"
+  },
+  "code": 403
+  
+[ root@curl-69c656fd45-2fghj:/ ]$ curl --cacert $CA_CERT -H "Authorization: Bearer $TOKEN" "https://kubernetes/api/v1/namespaces/$NAMESPACE/pods/"
+{
+  "kind": "Status",
+  "apiVersion": "v1",
+  "metadata": {
+    
+  },
+  "status": "Failure",
+  "message": "pods is forbidden: User \"system:serviceaccount:default:default\" cannot list resource \"pods\" in API group \"\" in the namespace \"default\"",
+  "reason": "Forbidden",
+  "details": {
+    "kind": "pods"
+  },
+  "code": 403
+```
+
+要想`pod`能够访问集群资源就得跟第一种方式一样给默认生成的名为`default`的`serviceaccount`赋予一个有权限访问的角色`role`才行。下面创建了一个`test-role`的角色，能够`get, watch, list`域名空间`default`的资源`pods`。
+
+```
+[root@master-1 yamlfiles]# cat test-role.yaml 
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: test-role
+  namespace: default
+rules:
+- apiGroups: [""] # "" 指定核心 API 组
+  resources: ["pods", "services"]
+  verbs: ["get", "watch", "list"]
+```
+
+然后将有权限的角色`test-role`与默认创建名为`default`的`serviceaccount`用`RoleBinding`绑定，`subjects`可以是`user, group, serviceaccount`，注意：不能修改已创建的`rolebinding`，修改后apply会报错，只能删除重新创建。
+
+```
+[root@master-1 yamlfiles]# cat test-rolebinding.yaml 
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: test-rolebinding
+  namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: test-role
+subjects:
+  #- kind: User
+  #- kind: Group
+  - kind: ServiceAccount
+    name: default
+    namespace: default
+```
+
+创建`role和rolebinding`后就可以访问之前不能访问的`services, pod`资源了。
+
+```
+[ root@curl-69c656fd45-2fghj:/ ]$ curl --cacert $CA_CERT -H "Authorization: Bearer $TOKEN" "https://kubernetes/api/v1/namespaces/$NAMESPACE/services/"
+{
+  "kind": "ServiceList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/namespaces/default/services/",
+    "resourceVersion": "579968"
+  },
+  "items": [
+    {
+      {
+      ......
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "https",
+            "protocol": "TCP",
+            "port": 443,
+            "targetPort": 6443
+          }
+        ],
+        "clusterIP": "10.96.0.1",
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      },
+      "status": {
+        "loadBalancer": {
+          
+        }
+      }
+    },
+    ......
+   ]
+}
+```
+```
+[ root@curl-69c656fd45-2fghj:/ ]$ curl --cacert $CA_CERT -H "Authorization: Bearer $TOKEN" "https://kubernetes/api/v1/namespaces/$NAMESPACE/pods/"
+{
+  "kind": "PodList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/namespaces/default/pods/",
+    "resourceVersion": "586324"
+  },
+  "items": [
+            ......
+            "ready": true,
+            "restartCount": 2,
+            "image": "redis:latest",
+            "imageID": "docker-pullable://redis@sha256:09c33840ec47815dc0351f1eca3befe741d7105b3e95bc8fdb9a7e4985b9e1e5",
+            "containerID": "docker://5f8ec1b06a7eacff0c2d38bb2c9c6cd2654d064e70da38012d866ad9d151c980",
+            "started": true
+          }
+        ],
+        "qosClass": "BestEffort"
+      }
+    }
+  ]
+}
+```
+
+但是`role`角色仅对特定域名空间有效，这里仅对`default namespace`有效，所以要对其他域名空间是访问不了的。如下访问`kube-system`的`svc, pod`资源就`403`了。
+
+```
+[ root@curl-tns-794f864c5c-bphsl:/ ]$ curl --cacert $CA_CERT -H "Authorization: Bearer $TOKEN" "https://kubernetes/api/v1/namespaces/kube-system/pods/"
+{
+  "kind": "Status",
+  "apiVersion": "v1",
+  "metadata": {
+    
+  },
+  "status": "Failure",
+  "message": "pods is forbidden: User \"system:serviceaccount:default:default\" cannot list resource \"pods\" in API group \"\" in the namespace \"kube-system\"",
+  "reason": "Forbidden",
+  "details": {
+    "kind": "pods"
+  },
+  "code": 403
+
+[ root@curl-tns-794f864c5c-bphsl:/ ]$ curl --cacert $CA_CERT -H "Authorization: Bearer $TOKEN" "https://kubernetes/api/v1/namespaces/kube-system/services/"
+{
+  "kind": "Status",
+  "apiVersion": "v1",
+  "metadata": {
+    
+  },
+  "status": "Failure",
+  "message": "services is forbidden: User \"system:serviceaccount:default:default\" cannot list resource \"services\" in API group \"\" in the namespace \"kube-system\"",
+  "reason": "Forbidden",
+  "details": {
+    "kind": "services"
+  },
+  "code": 403
+```
+
+那要使默认`serviceaccount`能`default`能访问其他域名空间的资源就得赋予一个`clusterrole`并且将它们绑定才行了。
+```
+[root@master-1 yamlfiles]# cat test-clusterrole.yaml 
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  annotations:
-    rbac.authorization.kubernetes.io/autoupdate: "true"
-  creationTimestamp: "2020-06-09T02:25:46Z"
-  labels:
-    kubernetes.io/bootstrapping: rbac-defaults
-  name: admin
-  resourceVersion: "320"
-  selfLink: /apis/rbac.authorization.k8s.io/v1/clusterroles/admin
-  uid: 378a73fa-1a00-49b3-b9a5-a168ded5c507
+  name: test-clusterrole
+  #namespace: default
 rules:
-- apiGroups:
-  - ""
-  resources:
-  - pods/attach
-  - pods/exec
-  - pods/portforward
-  - pods/proxy
-  - secrets
-  - services/proxy
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  ......
-- apiGroups:
-  ......
+- apiGroups: [""] # "" 指定核心 API 组
+  resources: ["pods", "services"]
+  verbs: ["get", "watch", "list"]
+
+
+[root@master-1 yamlfiles]# cat test-clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: test-clusterrolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: test-clusterrole
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: default
+
+
+[root@master-1 yamlfiles]# kubectl apply -f test-clusterrole.yaml 
+clusterrole.rbac.authorization.k8s.io/test-clusterrole created
+[root@master-1 yamlfiles]# kubectl apply -f test-clusterrolebinding.yaml 
+clusterrolebinding.rbac.authorization.k8s.io/test-clusterrolebinding created
+[root@master-1 yamlfiles]# kubectl get clusterrole test-clusterrole 
+NAME               AGE
+test-clusterrole   16s
+[root@master-1 yamlfiles]# kubectl get clusterrolebindings.rbac.authorization.k8s.io test-clusterrolebinding 
+NAME                      AGE
+test-clusterrolebinding   22s
 ```
 
-由上面可知，其实`ServiceAccount api`就是将第一种方式生成签名证书等复杂步骤给搞定了，当调用api时就**自动生成一个default-token来作为签名证书，自动赋予一个`admin`权限的`role(cluseterrole)`**，然后只要有了这个具有权限的`serviceaccount`的`pod`就可以正常访问集群了。So Easy ~ 妈妈再也不用担心我没有访问权限了。
+可以看到现在已经可以正常访问域名空间为`kube-system`的`services, pods`了。
 
-你以为就完了吗？这才刚刚开始，前面提到的两种方式只是通过了访问流程中的第一步---**认证**，而**鉴权流程**（这里粗略涉及到了使用默认的角色权限）和**准入控制流程**还没有开始呢。考虑到如果使用自定义权限**鉴权**，内容应该挺多的就下篇再记录吧。
+```
+[ root@curl-tns-794f864c5c-bphsl:/ ]$ curl --cacert $CA_CERT -H "Authorization: Bearer $TOKEN" "https://kubernetes/api/v1/namespaces/kube-system/services/"
+{
+  "kind": "ServiceList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/namespaces/kube-system/services/",
+    "resourceVersion": "610563"
+  },
+  "items": [
+  ......
+  ]
+}
+```
+```
+[ root@curl-tns-794f864c5c-bphsl:/ ]$ curl --cacert $CA_CERT -H "Authorization: Bearer $TOKEN" "https://kubernetes/api/v1/namespaces/kube-system/services/"
+{
+  "kind": "PodList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/namespaces/kube-system/pods/",
+    "resourceVersion": "610739"
+  },
+  "items": [
+  ......
+  ]
+}
+```
+
+由上面可知，其实`ServiceAccount api`就是将第一种方式生成签名证书等复杂步骤给搞定了，当调用api时就**自动生成一个default-token（里面包含了集群的ca.crt证书）来作为签名证书，自动生成一个名为`default`的`serviceaccount`，但它没有任何访问集群资源的权限，如果需要权限的话得给它绑定一个`role(clusterrole)`，然后只要有了这个具有权限的`serviceaccount`的`pod`就可以正常访问集群了**。
+
+#### 小结
+
+至此，此篇记录已大概实践了下`api-server`访问流程中的**认证流程**，**鉴权流程**，下一篇实践下**准入控制流程**
 
 #### 参考文章
 >`https://developer.aliyun.com/lesson_1651_18376?spm=5176.10731542.0.0.3c0b20belXDiuY#_18376`
@@ -372,6 +581,10 @@ rules:
 
 >`https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/`
 
-### 17。如何对pod做权限限制？(鉴权篇)
+>`https://kubernetes.io/docs/reference/access-authn-authz/rbac/`
+
+>`https://thenewstack.io/kubernetes-access-control-exploring-service-accounts/`
+
+### 17.如何对pod做权限限制？(准入控制篇)
 
 **To Be Continue ~**
