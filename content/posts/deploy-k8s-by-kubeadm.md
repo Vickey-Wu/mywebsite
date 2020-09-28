@@ -66,6 +66,7 @@ localhost.localdomain
 sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 sudo yum install docker-ce-18* docker-ce-cli-18* containerd.io -y
+systemctl start docker
 
 cat > /etc/docker/daemon.json <<EOF
 {
@@ -87,9 +88,7 @@ systemctl daemon-reload
 systemctl restart docker
 
 # 设置开机启动
-mkdir -p /etc/systemd/system/docker.service.d
 systemctl enable docker
-
 ```
 
 查看docker version
@@ -112,6 +111,8 @@ cat <<EOF > /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
 baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
+# if aarch64 use below
+#baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-aarch64/
 enabled=1
 gpgcheck=1
 repo_gpgcheck=1
@@ -206,12 +207,10 @@ k8s.gcr.io/etcd:3.3.15-0
 k8s.gcr.io/coredns:1.6.2
 ```
 
-然后将获取到的镜像及版本放到脚本并执行即可将镜像拉取下来(阿里云没有1.16.10，我改为1.16.9了)
+然后将获取到的镜像及版本放到脚本并执行即可将镜像拉取下来(阿里云没有1.16.10，我改为1.16.9了), 注意：如果你的服务器架构是`aarch64`的，除了`coredns`所有镜像后面都得加`-arm64`, 如`kube-apiserver-arm64:v1.16.9`
 
 ```
 [root@master-1 ~]# vim pull_image.sh
-
-
 IMAGES=(
  kube-apiserver:v1.16.9
  kube-controller-manager:v1.16.9
