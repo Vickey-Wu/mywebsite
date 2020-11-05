@@ -88,6 +88,45 @@ ba7d8361e0f422bb: name=infra1 peerURLs=http://192.168.0.2:2380 clientURLs=http:/
 c883f9e325d8667d: name=infra0 peerURLs=http://192.168.0.1:2380 clientURLs=http://0.0.0.0:2379 isLeader=true
 ```
 
+6.移除、新增etcd节点(拓展)
+
+- 移除问题节点
+
+```
+[root@master01 ~]# etcdctl member list
+b988b9a638414395: name=infra2 peerURLs=http://192.168.0.3:2380 clientURLs=http://0.0.0.0:2379 isLeader=true
+ba7d8361e0f422bb: name=infra1 peerURLs=http://192.168.0.2:2380 clientURLs=http://0.0.0.0:2379 isLeader=false
+c883f9e325d8667d: name=infra0 peerURLs=http://192.168.0.1:2380 clientURLs=http://0.0.0.0:2379 isLeader=false
+[root@master01 ~]# etcdctl member remove c883f9e325d8667d
+Removed member c883f9e325d8667d from cluster
+```
+
+- 新增节点
+
+**按1、2步安装并配置好新etcd节点**后先不要启动，先在原有etcd节点执行添加新节点命令。
+
+```
+[root@master01 ~]# etcdctl member add infra3 http://192.168.0.4:2380
+Added member named infra3 with ID a294929300a8b1bb to cluster
+
+ETCD_NAME="infra3"
+ETCD_INITIAL_CLUSTER="infra3=http://192.168.0.4:2380,infra2=http://192.168.0.3:2380,infra1=http://192.168.0.2:2380"
+ETCD_INITIAL_CLUSTER_STATE="existing"
+```
+
+然后**按照上面的输出再修改配置文件**，然后执行`systemctl start etcd`即可新增节点
+
+```
+[root@master01 ~]# systemctl start etcd
+[root@master01 ~]# etcdctl member list
+member a294929300a8b1bb is healthy: got healthy result from http://0.0.0.0:2379
+member b988b9a638414395 is healthy: got healthy result from http://0.0.0.0:2379
+member ba7d8361e0f422bb is healthy: got healthy result from http://0.0.0.0:2379
+cluster is healthy
+```
+
+参考：>https://etcd.io/docs/v3.3.12/op-guide/runtime-configuration/
+
 #### 二、k8s master ha
 
 >这里默认你已经安装好docker及k8s组件，由于本实例安装是基于arm64架构的华为鲲鹏服务器，支持的版本为`1.14.2`比较低，如果在阿里云等x86架构的服务器安装可以安装最新版的`1.19.2`，目的是实践`k8s master ha`，所以版本不是很重要。
@@ -420,6 +459,10 @@ nginx-deployment-56db997f77-cwf2l   0/1     ContainerCreating   0          5s
 nginx-deployment-56db997f77-cwf2l   1/1     Running             0          7s
 nginx-deployment-56db997f77-btw56   1/1     Running             0          9s
 ```
+
+9.替换master节点（拓展）
+
+**按照第3、4步新增一个master节点**，然后修改所有master节点`/etc/kubernetes/manifests/kube-apiserver.yaml`文件中的参数`--etcd-servers`，将有问题的etcd替换为新起的etcd节点，保存即可，k8s会自动重启`apiserver`的静态pod
 
 #### 参考文章
 

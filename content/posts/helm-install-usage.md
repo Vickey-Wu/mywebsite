@@ -179,6 +179,8 @@ hello-7bd9497468-v7tr9                0/1     Terminating   0          45s
 
 6. helm repo添加更新
 
+>官方repo stable https://charts.helm.sh/stable
+
 ```
 [root@master-1 tmp]# helm repo list 
 Error: no repositories to show
