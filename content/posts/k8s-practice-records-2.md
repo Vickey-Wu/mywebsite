@@ -341,7 +341,7 @@ test local
 
 #### 9.如何使用nfs持久化pod数据
 
-安装`rpcbind,nfs`，创建共享目录
+centos: 安装`rpcbind,nfs`，创建共享目录
 
 ```
 [root@master-1 yamlfiles]# yum -y install nfs-utils rpcbind
@@ -361,6 +361,14 @@ Complete!
 [root@master-1 /]# echo "/nfsshare *(rw,sync,no_root_squash)" >> /etc/exports
 [root@master-1 /]# cat /etc/exports
 /nfsshare *(rw,sync,no_root_squash)
+[root@master-1 /]# exportfs -rv
+```
+
+ubuntu
+
+```
+sudo apt-get install nfs-kernel-server  # 安装 NFS服务器端
+sudo apt-get install nfs-common         # 安装 NFS客户端
 ```
 
 启动`rpcbind, nfs`服务
