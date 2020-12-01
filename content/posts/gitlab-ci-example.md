@@ -50,7 +50,7 @@ sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab
 sudo gitlab-runner start
 ```
 
->https://docs.gitlab.com/runner/install/linux-manually.html#using-binary-file
+>`https://docs.gitlab.com/runner/install/linux-manually.html#using-binary-file`
 
 
 #### 2. 复制group token
@@ -86,7 +86,7 @@ Runner registered successfully. Feel free to start it, but if it's running alrea
 
 - 如注册时输入有误可以手动修改配置文件`/etc/gitlab-runner/config.toml`，注意：config.toml里的token跟第2步的token不是同一个东西，不要混淆。下面为config.toml文件
 
->https://docs.gitlab.com/runner/executors/kubernetes.html
+>`https://docs.gitlab.com/runner/executors/kubernetes.html`
 
 ```
 concurrent = 1

@@ -82,6 +82,8 @@ helm repo update
 
 所需yaml文件从[github仓库](https://github.com/Vickey-Wu/nfs-provisioner)复制过来修改一下**nfs变量your_nfs_server_ip, your_nfs_share_dir，还有namespace改为跟安装prometheus的namespace一致**，然后`kubectl apply -f .`安装即可。
 
+>`https://github.com/Vickey-Wu/nfs-provisioner`
+
 ```
 [root@ecs-6272 nfs-provisioner]# kubectl apply -f  storageclass.yaml 
 storageclass.storage.k8s.io/managed-nfs-storage created
@@ -140,6 +142,9 @@ nfs-client-provisioner-7fc4bcf9c7-9nz9g   1/1     Running   0          73s
 - grafana
 
 grafana本身没有提供持久化配置，我用下面的配置持久化好像也不行。。。可以查看[github issue](https://github.com/prometheus-community/helm-charts/pull/323)
+
+>`https://github.com/prometheus-community/helm-charts/pull/323`
+
 ```
     persistence:
       type: pvc
@@ -249,6 +254,8 @@ service/prometheus-grafana edited
 
 去[grafana官方模板库](https://grafana.com/grafana/dashboards)查找更多模板，找到想要的模板，复制id。然后在grafana的dashboard > manage > import > 填写id > load > VictoriaMetrics选择metrics > import 就可以看到已经应用了该模板。
 
+>`https://grafana.com/grafana/dashboards`
+
 ![grafana-module](https://note.youdao.com/yws/api/personal/file/9B2F1FA2949249039CEA328098DC9FC0?method=download&shareKey=313fd7d96112035c83791047ba6875b2)
 
 ![grafana-module-view](https://note.youdao.com/yws/api/personal/file/555964017BF44ABFB4548A931BB9D13A?method=download&shareKey=2b5fff2c9ac05867694da507bc7899e3)
@@ -273,8 +280,8 @@ service/prometheus-grafana edited
 
 #### 参考文章
 
->https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack
+>`https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack`
 
->https://github.com/prometheus-community/helm-charts/issues/250
+>`https://github.com/prometheus-community/helm-charts/issues/250`
 
->https://www.youtube.com/watch?v=CmPdyvgmw-A
+>`https://www.youtube.com/watch?v=CmPdyvgmw-A`

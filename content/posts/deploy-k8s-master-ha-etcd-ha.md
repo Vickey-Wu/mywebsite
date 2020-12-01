@@ -125,7 +125,7 @@ member ba7d8361e0f422bb is healthy: got healthy result from http://0.0.0.0:2379
 cluster is healthy
 ```
 
-参考：>https://etcd.io/docs/v3.3.12/op-guide/runtime-configuration/
+参考：>`https://etcd.io/docs/v3.3.12/op-guide/runtime-configuration/`
 
 #### 二、k8s master ha
 
