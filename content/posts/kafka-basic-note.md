@@ -16,37 +16,60 @@ tags:
 
 kafka是一个高性能（TB级数据可在常数时间访问）、可扩展（支持在线水平扩展）、高吞吐（10k/s）、高容错（数据持久化到磁盘）的开源分布式事件流消息系统。
 
-- broker：经纪人，kafka集群包含若干个服务器节点，这些节点被称为broker，用来存储topic数据。
-- topic: 主题，使用主题来表示消息的类别。
-- broker controller：经纪人控制器，kafka集群中多个broker中有一个会被选举为broker controller，负责管理整个集群的partition。
-- partitions：分区，主题中的消息可以被分割的若干分区，一个分区对应一个目录，分区内部消息是有序的，但分区间的消息是无序的。
-- replizcas of partition：分区副本，为防止消息丢失创建的分区的备份。
-- partition leader：主副本，如分区有有多个副本，其中只能有一个leader副本，负责读写消息。
-- partition follower：副本跟随者，所有follower从leader同步消息，它们是主备关系而非主从关系。
-- segment：分段，分区的消息可以被分未若干分段，每个分段文件大小相等。
-- producer：生产者，生产消息存储到topic的某个分区。
-- consumer：消费者，消费生产者生产的消息。
-- consumer group：消费者组，组内有多个消费者，它们共享公共的group ID，一起消费主题的所有分区，同组内只有一个消费者消费某一条消息，不会多个消费同一条。
-- current offset：当前偏移量，它是指向Kafka已经发送给消费者的最后一条记录的指针，它用来确保消费过的数据不会被再次消费
-- committed offset：已提交偏移量，它是指向消费者已成功消费的最后一条记录的指针，它用于避免在分区重新平衡（rebalance）时将相同的记录重新发送给新的消费者。
-- rebalance：分区再平衡，指消费者组中的consumer数量或topic中的partition数量发生变化时partition重新划分的过程。
-- ZooKeeper：消息注册中心，负责维护和协调broker，负责broker controller的选举，管理offset。
+
+>broker：经纪人，kafka集群包含若干个服务器节点，这些节点被称为broker，用来存储topic数据。
+
+>topic: 主题，使用主题来表示消息的类别。
+
+>broker controller：经纪人控制器，kafka集群中多个broker中有一个会被选举为broker controller，负责管理整个集群的partition。
+
+>partitions：分区，主题中的消息可以被分割的若干分区，一个分区对应一个目录，分区内部消息是有序的，但分区间的消息是无序的。
+
+>replizcas of partition：分区副本，为防止消息丢失创建的分区的备份。
+
+>partition leader：主副本，如分区有有多个副本，其中只能有一个leader副本，负责读写消息。
+
+>partition follower：副本跟随者，所有follower从leader同步消息，它们是主备关系而非主从关系。
+
+>segment：分段，分区的消息可以被分未若干分段，每个分段文件大小相等。
+
+>producer：生产者，生产消息存储到topic的某个分区。
+
+>consumer：消费者，消费生产者生产的消息。
+
+>consumer group：消费者组，组内有多个消费者，它们共享公共的group ID，一起消费主题的所有分区，同组内只有一个消费者消费某一条消息，不会多个消费同一条。
+
+>current offset：当前偏移量，它是指向Kafka已经发送给消费者的最后一条记录的指针，它用来确保消费过的数据不会被再次消费
+
+>committed offset：已提交偏移量，它是指向消费者已成功消费的最后一条记录的指针，它用于避免在分区重新平衡（rebalance）时将相同的记录重新发送给新的消费者。
+
+>rebalance：分区再平衡，指消费者组中的consumer数量或topic中的partition数量发生变化时partition重新划分的过程。
+
+>ZooKeeper：消息注册中心，负责维护和协调broker，负责broker controller的选举，管理offset。
 
 #### 应用场景
 
-1.用户活动跟踪
-2.日志收集
-3.限流削峰
+>用户活动跟踪
+
+>日志收集
+
+>限流削峰
 
 #### kafka优点
 
-1.解耦
-2.冗余
-3.可扩展
-4.削峰
-5.可恢复
-6.顺序处理
-7.异步通信
+>解耦
+
+>冗余
+
+>可扩展
+
+>削峰
+
+>可恢复
+
+>顺序处理
+
+>异步通信
 
 #### kafka单点部署
 

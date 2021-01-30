@@ -44,13 +44,74 @@ elastic/metricbeat       	7.10.0       	7.10.0     	Official Elastic helm chart 
 
 所需yaml文件从[github仓库](https://github.com/Vickey-Wu/nfs-provisioner)复制过来修改一下**nfs变量your_nfs_server_ip, your_nfs_share_dir，还有namespace改为跟安装elk的namespace一致**，然后`kubectl apply -f .`安装即可。
 
->`https://github.com/Vickey-Wu/nfs-provisioner`
+>https://github.com/Vickey-Wu/nfs-provisioner
 
 #### 安装elasticsearch
 
 Elasticsearch: 用来存储数据，索引数据
 
->由于我的服务器性能不够，就用`kubectl taint node xxx node-role.kubernetes.io/master-`将master节点设为可调度，使用`helm show values`将组件的`values.yaml`的内容拉下来修改配置，将es最少3个master节点改为了1个，还有CPU、内存等资源限制改小了，像kibana等其他组件按照同样的方法修改配置。服务器资源足够的话就无需改动，直接`helm install elastic/xxx`就行了。
+>由于我的服务器性能不够，就用`kubectl taint node xxx node-role.kubernetes.io/master-`将master节点设为可调度，使用`helm show values`将组件的`values.yaml`的内容拉下来修改配置，将es最少3个master节点改为了1个，还有CPU、内存等资源限制改小了，像kibana等其他组件按照同样的方法修改配置。服务器资源足够的话就无需改动，直接`helm install elastic/xxx`就行了。然后es设置密码需要生成证书并添加到配置
+
+- 生成证书
+
+```
+docker run --name elastic-charts-certs -i -w /app elasticsearch:7.7.1 /bin/sh -c  \
+  "elasticsearch-certutil ca --out /app/elastic-stack-ca.p12 --pass '' && \
+    elasticsearch-certutil cert --name security-master --dns \
+    security-master --ca /app/elastic-stack-ca.p12 --pass '' --ca-pass '' --out /app/elastic-certificates.p12"
+    
+docker cp elastic-charts-certs:/app/elastic-certificates.p12 ./ 
+
+docker rm -f elastic-charts-certs
+
+openssl pkcs12 -nodes -passin pass:'' -in elastic-certificates.p12 -out elastic-certificate.pem
+```
+
+- 创建secret
+
+```
+[root@ecs-6272 project]# openssl pkcs12 -nodes -passin pass:'' -in elastic-certificates.p12 -out elastic-certificate.pem
+MAC verified OK
+[root@ecs-6272 project]# kubectl create secret  generic elastic-certificates --from-file=elastic-certificates.p12
+secret/elastic-certificates created
+
+[root@ecs-6272 project]#  kubectl create secret generic elastic-certificate-pem --from-file=elastic-certificate.pem
+secret/elastic-certificate-pem created
+
+[root@ecs-6272 project]# kubectl create secret generic elastic-credentials   --from-literal=username=elastic --from-literal=password=123123
+secret/elastic-credentials created
+```
+
+- 添加配置
+
+```
+esConfig:
+  elasticsearch.yml: |
+    xpack.security.enabled: true
+    xpack.security.transport.ssl.enabled: true
+    xpack.security.transport.ssl.verification_mode: certificate
+    xpack.security.transport.ssl.keystore.path: /usr/share/elasticsearch/config/certs/elastic-certificates.p12
+    xpack.security.transport.ssl.truststore.path: /usr/share/elasticsearch/config/certs/elastic-certificates.p12
+
+extraEnvs:
+  - name: ELASTIC_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: elastic-credentials
+        key: username
+  - name: ELASTIC_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: elastic-credentials
+        key: password
+
+secretMounts:
+  - name: elastic-certificates
+    secretName: elastic-certificates
+    path: /usr/share/elasticsearch/config/certs
+```
+
+- 执行安装
 
 ```
 [root@ecs-6272 project]# helm show values elastic/elasticsearch>/tmp/elastic-values.yaml
@@ -115,11 +176,31 @@ kubernetes                      ClusterIP   10.96.0.1       <none>        443/TC
 }
 ```
 
-![elasticsearch](https://note.youdao.com/yws/api/personal/file/B562D51E4A234C49990735EBAEA7B371?method=download&shareKey=59f7bf8aad530b8eeb611aaf4001e09c)
+![es-with-password](https://note.youdao.com/yws/api/personal/file/95100982D3E745E8BDBF4933EB744D0A?method=download&shareKey=2711b1b1c46855592ede09880b49109f)
 
 #### 安装kibana
 
-Kibana:用来可视化数据，分析数据，下面步骤会做示例
+Kibana:用来可视化数据，分析数据，下面步骤会做示例。为kibana设置密码
+
+```
+secretMounts:
+  - name: elastic-certificates
+    secretName: elastic-certificates
+    path: /usr/share/elasticsearch/config/certs
+
+extraEnvs:
+  - name: ELASTIC_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: elastic-credentials
+        key: username
+  - name: ELASTIC_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: elastic-credentials
+        key: password
+```
+![kibana-with-password](https://note.youdao.com/yws/api/personal/file/2C814AEDFEBB4EA589DA0ADDA1B5A26E?method=download&shareKey=4730ab14fa4758eff74714341eb0236f)
 
 ![kibana](https://note.youdao.com/yws/api/personal/file/AC82D066B9D245FD86B3FD90322B0E88?method=download&shareKey=f39dfde21c7e78cade7d614039ab040c)
 
@@ -213,12 +294,14 @@ nfs-client-provisioner-7fc4bcf9c7-4vbvf   1/1     Running   0          42h   10.
 
 #### 参考文章
 
->`https://itnext.io/deploy-elastic-stack-on-kubernetes-1-15-using-helm-v3-9105653c7c8`
+>https://itnext.io/deploy-elastic-stack-on-kubernetes-1-15-using-helm-v3-9105653c7c8
 
->`https://logz.io/blog/deploying-the-elk-stack-on-kubernetes-with-helm/`
+>https://logz.io/blog/deploying-the-elk-stack-on-kubernetes-with-helm/
 
->`https://www.elastic.co/beats/`
+>http://www.mydlq.club/article/13/#wow9
 
->`https://github.com/dimMaryanto93/docker-logstash-input-jdbc`
+>https://www.elastic.co/beats/
 
->`https://www.cnblogs.com/sanduzxcvbnm/p/12869858.html`
+>https://github.com/dimMaryanto93/docker-logstash-input-jdbc
+
+>https://www.cnblogs.com/sanduzxcvbnm/p/12869858.html
