@@ -25,6 +25,8 @@ HAProxy实现了一种事件驱动、单一进程模型，支持10k/s并发连�
 
 1. global全局配置段 包含log，pidfile，maxconn，user，daemon
 2. proxies：代理配置段 包含defaults：为frontend, backend, listen提供默认配置；fronted：前端，相当于nginx，server {}；backend：后端，相当于nginx， upstream {}；listen：同时拥有前端和后端，适用于一对一环境
+3. frontend，backend中的配置除acl、bind、http-request、http-response、use_backend外，其余的均可以配置在default域中
+4. listen域是frontend域和backend域的组合，frontend域和backend域中所有的配置都可以配置在listen域下
 
 详细参考：`https://eclass.uoa.gr/modules/document/file.php/D245/haproxy.pdf`
 

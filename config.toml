@@ -68,7 +68,7 @@ layout = "2"
 # Meta data
 description = "This is meta description"
 # about author
-author = "Viceky Wu"
+author = "Vickey Wu"
 author_image = "images/banner-img.png"
 bio = "大家好，我是吴悟无，90后，性别男，爱好女, 一个背锅工程师（你懂的）"
 # Contact info
@@ -80,7 +80,7 @@ contact_form_action = "#"
 # Google Analitycs
 google_analitycs_id = "UA-160193453-1"
 # copyright
-copyright = "[粤ICP备20018746号](https://beian.miit.gov.cn) Copyright &copy; 2018-2020 a theme by [parsa-hugo](https://github.com/themefisher/parsa-hugo)"
+copyright = "[粤ICP备20018746号](https://beian.miit.gov.cn) Copyright &copy; 2018-2021 a theme by [parsa-hugo](https://github.com/themefisher/parsa-hugo)"
 # beianhao
 beianhao = "1233242"
 

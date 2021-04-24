@@ -31,7 +31,7 @@ tags:
 // 国内服务器
 curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
 // 国外服务器
-curl -o "https://get.helm.sh/helm-canary-linux-amd64.tar.gz" heml3.tar.gz
+curl -o heml3.tar.gz "https://get.helm.sh/helm-canary-linux-amd65.tar.gz"
 ```
 
 - install helm3
